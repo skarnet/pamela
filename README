@@ -1,0 +1,28 @@
+pamela - a PAM wrapper for secure execution
+-------------------------------------------
+
+ pamela is a library implementing the PAM API.
+
+ Traditional PAM implementations such as Linux-PAM
+load PAM modules dynamically into the application's address
+space. This is unsafe and exposes a lot of attack surface.
+Instead, pamela encapsulates the inner workings of PAM
+in a binary which is itself linked against Linux-PAM and
+performs all the module loading in its own address space;
+pamela provides an implementation of the PAM user API that
+communicates with that binary, keeping the application's
+address space free of external modules. 
+
+ See http://skarnet.org/software/pamela/ for details.
+
+
+* Installation
+  ------------
+
+ See the INSTALL file.
+
+
+* Contact information
+  -------------------
+
+ Laurent Bercot <ska-skaware at skarnet.org>

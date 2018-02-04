@@ -1,0 +1,7 @@
+*.o
+*.lo
+/config.mak
+/src/include/pamela/config.h
+/pamelad
+/libpamela.a.xyzzy
+/libpamela.so.xyzzy

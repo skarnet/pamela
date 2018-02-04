@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>pamela - a secure PAM implementation</title>
+    <meta name="Description" content="pamela - a secure PAM implementation" />
+    <meta name="Keywords" content="pamela PAM linux pluggable authentication modules unix login laurent bercot skarnet" />
+    <!-- <link rel="stylesheet" type="text/css" href="//skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="//skarnet.org/software/">Software</a><br />
+<a href="//skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> pamela </h1>
+
+<p style="text-align:right;"><small><em>don't crack this root of mine</em></small></p>
+
+<h2> What is it&nbsp;? </h2>
+
+<p>
+ pamela stands for PAM Encapsulated Loading Architecture.
+</p>
+
+<p>
+ It is a library implementing Linux-PAM's
+<a href="http://www.linux-pam.org/Linux-PAM-html/adg-interface-by-app-expected.html"><tt>security/pam_appl.h</tt></a>
+header, for applications to use instead of the default Linux-PAM
+<tt>security/pam_appl.h</tt> header. pamela wraps all PAM calls and
+deports them to a <a href="pamelad.html">pamelad</a> binary running
+as a child of the application, which performs the real calls to
+Linux-PAM.
+</p>
+
+<p>
+ The advantage of this setup is that it reduces the application's
+attack surface considerably. Instead of loading modules into the
+application's address space, PAM loads modules into the small,
+dedicated pamelad binary, whose main source code is less than 400
+lines long. Also, if the application runs as root, the pamelad
+binary can run as an unprivileged user, so modules cannot be used
+for privilege elevation.
+</p>
+
+<hr />
+
+<h2> Installation </h2>
+
+<h3> Requirements </h3>
+
+<ul>
+ <li> A POSIX-compliant system with a standard C development environment,
+that supports Linux-PAM - (so, probably a Linux system) </li>
+ <li> GNU make, version 3.81 or later </li>
+ <li> <a href="//skarnet.org/software/skalibs/">skalibs</a> version
+2.6.3.2 or later. It's a build-time requirement and a run-time
+requirement. </li>
+ <li> <a href="http://www.linux-pam.org/">Linux-PAM</a> version 1.3.0
+or later. It's a build-time requirement and a run-time requirement. </li>
+</ul>
+
+<h3> Licensing </h3>
+
+<p>
+ pamela is free software. It is available under the
+<a href="http://opensource.org/licenses/ISC">ISC license</a>.
+</p>
+
+<h3> Download </h3>
+
+<ul>
+ <li> <!-- The current released version of pamela is <a href="pamela-0.0.1.0.tar.gz">0.0.1.0</a>. -->
+ pamela is a work in progress: there is no numbered version yet. </li>
+ <li> You can checkout a copy of the
+<a href="//git.skarnet.org/cgi-bin/cgit.cgi/pamela/">pamela
+git repository</a>:
+<pre> git clone git://git.skarnet.org/pamela </pre> </li>
+ <li> There's also a
+<a href="https://github.com/skarnet/pamela">GitHub mirror</a>
+of the utmps git repository. </li>
+</ul>
+
+<h3> Compilation </h3>
+
+<ul>
+ <li> See the enclosed INSTALL file for installation details. </li>
+ <li> Please note that the build process expects <tt>security/pam_appl.h</tt>
+to be a Linux-PAM header. Because of this, pamela's <tt>make install</tt>
+does not overwrite <tt>security/pam_appl.h</tt>; instead, the header
+exposing PAM functionality is named <tt>pamela/pam.h</tt>. When you are
+positive you can replace the <tt>security/pam_appl.h</tt> header,
+the <tt>make install-symlink</tt> command will do it for you. </li>
+</ul>
+
+<h3> Upgrade notes </h3>
+
+<ul>
+ <li> <a href="upgrade.html">This page</a> lists the differences to be aware of between
+the previous versions of pamela and the current one. </li>
+</ul>
+
+<hr />
+
+<h2> Reference </h2>
+
+<h3> Commands </h3>
+
+<ul>
+<li><a href="pamelad.html">The <tt>pamelad</tt> internal program</a></li>
+</ul>
+
+<h3> Libraries </h3>
+
+<ul>
+<li> <a href="building.html">How to build an application with pamela</a> </li>
+<li> <a href="http://www.linux-pam.org/Linux-PAM-html/adg-interface-by-app-expected.html">The
+public interface to Linux-PAM</a> is implemented by the pamela library. </li>
+</ul>
+
+<hr />
+
+<a name="related">
+<h2> Related resources </h2>
+</a>
+
+<h3> pamela discussion </h3>
+
+<ul>
+ <li> <tt>pamela</tt> is discussed on the
+<a href="//skarnet.org/lists.html#skaware">skaware</a> mailing-list. </li>
+</ul>
+
+</body>
+</html>

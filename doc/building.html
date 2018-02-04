@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>pamela: building an application</title>
+    <meta name="Description" content="pamela: building an application" />
+    <meta name="Keywords" content="pamela PAM Linux-PAM library" />
+    <!-- <link rel="stylesheet" type="text/css" href="//skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="index.html">pamela</a><br />
+<a href="//skarnet.org/software/">Software</a><br />
+<a href="//skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> Building an application with pamela instead of Linux-PAM </h1>
+
+<h2> Prerequisites </h2>
+
+<ul>
+ <li> The pamela package must have been properly built and installed;
+in particular, the <a href="pamelad.html">pamelad</a> binary must
+have been properly linked against Linux-PAM's <tt>libpam.so</tt>. </li>
+ <li> The <tt>security/pam_appl.h</tt> header, usually installed in
+<tt>/usr/include</tt>, must be a symlink to pamela's
+<tt>pamela/pam.h</tt> header. This can be achieved by running
+<tt>make install-symlink</tt> after <tt>make install</tt> when
+building the pamela package. </li>
+ <li> The application must strictly follow the
+<a href="http://www.linux-pam.org/Linux-PAM-html/adg-interface-by-app-expected.html">Linux-PAM
+specification</a>. Note that the page claims that the
+<tt>pam_set_item()</tt> function is declared in <tt>security/pam_modules.h</tt>,
+but it is a mistake: like every PAM function used by applications, it
+is declared in <tt>security/pam_appl.h</tt>. </li>
+ <li> The pamela headers and library must be installed, as well as the
+<a href="//skarnet.org/software/skalibs/">skalibs</a> headers and library. </li>
+</ul>
+
+<h2> Compiling </h2>
+
+<ul>
+ <li> Make sure that the pamela headers and the skalibs headers
+are visible in your header search path, and that the
+Linux-PAM headers <em>are not</em>. </li>
+ <li> If the compilation fails, please report the issue to the
+skaware mailing-list. pamela is a work in progress, and there
+may be compatibility issues that still need to be fixed. </li>
+</ul>
+
+<h2> Linking </h2>
+
+<ul>
+ <li> Make sure the pamela library, as well as the skalibs
+library, are visible in your library search path. </li>
+ <li> Do not add <tt>-lpam</tt> to your linking command line.
+Instead, add <tt>-lpamela -lskarnet</tt>. Depending on the
+libc you're using, you may have to add <tt>-lrt</tt> too. </li>
+ <li> It is possible to statically link a binary using pamela:
+the pamela and skalibs libraries do not use any dynamic loading,
+and are suitable for static linking. Only the
+<a href="pamelad.html">pamelad</a> binary uses dynamic module
+loading and needs to be dynamically linked, and that is decided
+at pamela build time, not at your application's build time. </li>
+ <li> Check your application binary's dynamic library dependencies
+after it has been built. If your binary depends on <tt>libpam</tt>,
+it has been incorrectly made! Your binary should depend on
+<tt>libpamela</tt> and <tt>libskarnet</tt>, but not <tt>libpam</tt>.
+If you have chosen to link against the static version of pamela
+and skalibs, you may not even see the <tt>libpamela</tt> and
+<tt>libskarnet</tt> dependencies. </li>
+</ul>
+
+<h2> Programming </h2>
+
+<ul>
+ <li> pamela strictly implements the
+<a href="http://www.linux-pam.org/Linux-PAM-html/adg-interface-by-app-expected.html">Linux-PAM
+API</a> </li>
+ <li> The <tt>pam_start()</tt> function will spawn a
+<a href="pamelad.html">pamelad</a> binary running as a child of
+the application, until <tt>pam_end()</tt> is called. At that point
+the zombie is reaped. </li>
+ <li> If the <a href="pamelad.html">pamelad</a> binary is killed
+during the PAM session, all PAM calls will return PAM_ABORT.
+The application should then just exit, or call <tt>pam_end()</tt>
+to free resources: nothing more can be done with the session. </li>
+</ul>
+
+<h2> Running </h2>
+
+<ul>
+ <li> If your application runs as root, you can set the
+PAMELA_UID and PAMELA_GID environment variables to a non-zero
+numeric uid and a nonzero numeric gid prior to running it.
+The <a href="pamelad.html">pamelad</a> binary will then drop
+its privileges and run under this uid/gid. </li>
+</ul>
+
+</body>
+</html>

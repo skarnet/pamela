@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>pamela: the pamelad internal program</title>
+    <meta name="Description" content="pamela: the pamelad internal program" />
+    <meta name="Keywords" content="pamela command pamelad program internal libexec PAM module loader" />
+    <!-- <link rel="stylesheet" type="text/css" href="//skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="index.html">pamela</a><br />
+<a href="//skarnet.org/software/">Software</a><br />
+<a href="//skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> The pamelad program </h1>
+
+<p>
+pamelad is a helper program spawned by the pamela library, at <tt>pam_start()</tt> time.
+It communicates with the main application process, reading requests from it,
+performing PAM calls, and returning results to the application process.
+</p>
+
+<h2> Interface </h2>
+
+<p>
+ pamelad is not meant to be called directly. It is an <em>unexported</em>
+program, i.e. a program that the package's library is supposed to find, but
+that users should not run. Ideally it's kept outside of users' PATH variable.
+</p>
+
+<p>
+ pamelad is declared as a <em>libexec</em> binary, so it will probably be
+installed in <tt>/usr/libexec/pamelad</tt> or <tt>/usr/lib/pamela/pamelad</tt>,
+depending on the admin/distribution's preferences.
+</p>
+
+<p>
+ pamelad is run with two arguments, which are the <em>service_name</em> and
+<em>user</em> arguments given to the <tt>pam_start()</tt> call. This will
+display in a <tt>ps</tt> output, which is fine since this information is
+not confidential.
+</p>
+
+<p>
+ pamelad runs as the same uid and gid as the application. However, to
+increase security of applications running as root:
+</p>
+
+<ul>
+ <li> If the application runs as gid 0 and the PAMELA_GID environment
+variable is set, then pamelad will run with a gid set to <tt>$PAMELA_GID</tt>. </li>
+ <li> If the application runs as uid 0 and the PAMELA_UID environment
+variable is set, then pamelad will run with a uid set to <tt>$PAMELA_UID</tt>. </li>
+</ul>
+
+<p>
+ pamelad makes the real calls to Linux-PAM. Keep that in mind when
+configuring your PAM authorizations: if you're using the PAMELA_UID and
+PAMELA_GID variables, make sure the uid/gid are not used anywhere else,
+and give the proper PAM authorizations to that uid/gid pair instead of root.
+</p>
+
+</body>
+</html>
