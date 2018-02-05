@@ -3,9 +3,12 @@
 #ifndef PAMELA_PAM_H
 #define PAMELA_PAM_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
  /*
     This is pamela's client-side PAM library.
-    
  */
 
 #include <skalibs/uint64.h>
@@ -157,5 +160,9 @@ extern int pam_close_session (pam_handle_t *, int) ;
 extern int pam_putenv (pam_handle_t *, char const *) ;
 extern char const *pam_getenv (pam_handle_t *, char const *) ;
 extern char **pam_getenvlist (pam_handle_t *) ;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

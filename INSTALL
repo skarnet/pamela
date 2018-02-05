@@ -21,8 +21,9 @@ as well as Linux-PAM. As of February 2018, this means only Linux.
   ./configure && make && sudo make install
 
  will work for most users.
- It will install the binaries in /bin and the static libraries in
-/usr/lib/pamela.
+ It will install the pamelad binary in /libexec,
+the static library in /usr/lib/pamela,
+and the shared library in /lib.
 
  Please note that static libraries in /usr/lib/pamela *will not*
 be found by a default linker invocation: you need -L/usr/lib/pamela.
@@ -84,18 +85,6 @@ obtaining the behaviour you want.
 
  DESTDIR can be given on the "make install" command line in order to
 install to a staging directory.
-
-
-* Shared libraries
-  ----------------
-
- Software from skarnet.org is small enough that shared libraries are
-generally not worth using. Static linking is simpler and incurs less
-runtime overhead and less points of failure: so by default, shared
-libraries are not built and binaries are linked against the static
-versions of the skarnet.org libraries. Nevertheless, you can:
-  * build shared libraries: --enable-shared
-  * link binaries against shared libraries: --disable-allstatic
 
 
 * Static binaries

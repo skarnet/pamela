@@ -36,7 +36,7 @@ Dependencies:
  /usr/lib/skalibs/sysdeps.
 
 Optional features:
-  --enable-shared               build shared libraries [disabled]
+  --disable-shared              do not build shared libraries [enabled]
   --disable-static              do not build static libraries [enabled]
   --disable-allstatic           do not prefer linking against static libraries [enabled]
   --enable-static-libc          make entirely static binaries [disabled]
@@ -141,7 +141,7 @@ libdir='$prefix/lib/$package'
 includedir='$prefix/include'
 sysdeps='$prefix/lib/skalibs/sysdeps'
 manualsysdeps=false
-shared=false
+shared=true
 static=true
 allpic=detect
 slashpackage=false

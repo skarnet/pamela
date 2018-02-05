@@ -3,9 +3,11 @@
 #ifndef PAMELA_H
 #define PAMELA_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+ /*
+    Declarations for the client library.
+    This is the internal layer, that does not
+    depend on the PAM API.
+ */
 
 #include <sys/types.h>
 #include <stdint.h>
@@ -13,6 +15,11 @@ extern "C" {
 #include <skalibs/stralloc.h>
 #include <skalibs/textmessage.h>
 #include <pamela/common.h>
+
+
+ /* Misc defs */
+
+#define PAMELA_BUFSIZE 4096
 
 
  /* pam_fail_delay */
@@ -71,10 +78,5 @@ extern int pamela_get_item (pamela_t *, unsigned char, stralloc *) ;
 extern int pamela_set_item (pamela_t *, unsigned char, char const *) ;
 extern int pamela_set_itemv (pamela_t *, unsigned char, struct iovec const *, unsigned int) ;
 extern int pamela_op (pamela_t *, unsigned char, int) ;
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

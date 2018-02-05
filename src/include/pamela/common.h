@@ -3,6 +3,10 @@
 #ifndef PAMELA_COMMON_H
 #define PAMELA_COMMON_H
 
+ /*
+    Stuff used by the client library as well as pamelad.
+ */
+
 #define PAMELA_BUFSIZE 4096
 
 enum pamela_retcode_e
@@ -97,5 +101,6 @@ enum pamela_op_e
 #define PAMELA_PAM_REINITIALIZE_CRED 0x0008U
 #define PAMELA_PAM_REFRESH_CRED 0x0010U
 #define PAMELA_PAM_CHANGE_EXPIRED_AUTHTOK 0x0020U
+#define PAMELA_PAM_DATA_SILENT 0x40000000U
 
 #endif
