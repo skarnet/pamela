@@ -99,5 +99,32 @@ The <a href="pamelad.html">pamelad</a> binary will then drop
 its privileges and run under this uid/gid. </li>
 </ul>
 
+<h2> My application is not working with pam_foobar.so! </h2>
+
+<p>
+  A pamela-type architecture can only work if modules do not try
+to do anything fancy outside of the official PAM communication
+channels. In particular, if it <strong>sets global state</strong>,
+it will not work. PAM modules that
+</p>
+
+<ul>
+ <li> modify their process' environment </li>
+ <li> change their process' uid and gid </li>
+ <li> change their process' namespace </li>
+ <li> change the working directory </li>
+ <li> or any similar action impacting global data of the process </li>
+</ul>
+
+<p>
+ will not, and <em>cannot</em>, be supported by pamela. The only
+solution is to rewrite these modules so they communicate the
+change they wish to make via the official PAM API, and have the
+application perform the change itself. PAM provides a way to
+do this: the <em>conversation function</em>, which exchanges data
+between PAM and the application. pamela fully supports custom
+conversation functions.
+</p>
+
 </body>
 </html>
