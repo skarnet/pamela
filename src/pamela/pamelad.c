@@ -301,7 +301,7 @@ static void do_op (char type, int num)
       break ;
   }
   put(s, 2) ;
-  if (type == PAMELA_OP_END) _exit(0) ;
+  if (type == PAMELA_OP_END) cont = 0 ;
 }
 
 
