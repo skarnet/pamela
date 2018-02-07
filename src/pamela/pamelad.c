@@ -140,6 +140,7 @@ static void do_strerror (int num)
   if (!x)
   {
     char c = errno ;
+    if (!c) c = EIO ;
     put(&c, 1) ;
   }
   else
@@ -159,6 +160,7 @@ static void do_getenvlist (void)
   if (!envp)
   {
     char c = errno ;
+    if (!c) c = EIO ;
     put(&c, 1) ;
   }
   else
