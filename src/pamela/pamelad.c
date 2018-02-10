@@ -105,6 +105,7 @@ static int converse (int n, struct pam_message const **msg, struct pam_response 
     len = v.iov_len - 2 ;
     if (s[0] != 'C') return PAM_ABORT ;
     if (s[1]) return s[1] ;
+    s += 2 ;
     res = malloc(n * sizeof(struct pam_response)) ;
     if (!res) return PAM_BUF_ERR ;
     for (uint32_t i = 0 ; i < n ; i++)
