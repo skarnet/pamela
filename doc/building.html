@@ -122,8 +122,10 @@ solution is to rewrite these modules so they communicate the
 change they wish to make via the official PAM API, and have the
 application perform the change itself. PAM provides a way to
 do this: the <em>conversation function</em>, which exchanges data
-between PAM and the application. pamela fully supports custom
-conversation functions.
+between PAM and the application. Currently, only four types of
+messages are officially specified by PAM, but the mechanism is
+easily extensible and was designed for this. pamela fully supports
+customized conversation functions with any message type.
 </p>
 
 </body>
