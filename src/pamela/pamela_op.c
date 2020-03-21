@@ -4,11 +4,11 @@
 #include <stdint.h>
 #include <sys/uio.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/uint32.h>
 #include <skalibs/types.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/textmessage.h>
+#include <skalibs/posixishard.h>
 #include <pamela/pamela.h>
 
 static inline int pamela_fail_delay (pamela_t *a, int r, unsigned int usec)

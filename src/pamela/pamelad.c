@@ -7,7 +7,6 @@
 #include <errno.h>
 #include <sys/uio.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/uint32.h>
 #include <skalibs/types.h>
 #include <skalibs/bytestr.h>
@@ -16,6 +15,7 @@
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
+#include <skalibs/posixishard.h>
 #include <pamela/common.h>
 #include <security/pam_appl.h>
 
