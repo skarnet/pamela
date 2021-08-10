@@ -33,13 +33,13 @@ int pam_set_item (pam_handle_t *pamh, int item_type, void const *item)
     case PAM_FAIL_DELAY :
     {
       int e ;
-      pamh->handle.delayfn = (pamela_pam_delay_func_t_ref)item ;
+      pamh->handle.delayfn = (pamela_pam_delay_func_ref)item ;
       e = pamela_op(&pamh->handle, PAMELA_OP_SETFAILDELAY, 0) ;
       if (e != PAM_SUCCESS) return e ;
       break ;
     }
     case PAM_CONV :
-      pamh->handle.convfn = (pamela_pam_conv_func_t_ref)item ;
+      pamh->handle.convfn = (pamela_pam_conv_func_ref)item ;
       break ;
     case PAM_XAUTHDATA :
       return xauthdata_pack_and_set(&pamh->handle, (struct pam_xauth_data const *)item) ;

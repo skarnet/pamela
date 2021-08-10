@@ -63,7 +63,7 @@ for privilege elevation.
 that supports Linux-PAM - (so, probably a Linux system) </li>
  <li> GNU make, version 3.81 or later </li>
  <li> <a href="//skarnet.org/software/skalibs/">skalibs</a> version
-2.9.2.0 or later. It's a build-time requirement and a run-time
+2.11.0.0 or later. It's a build-time requirement and a run-time
 requirement. </li>
  <li> <a href="http://www.linux-pam.org/">Linux-PAM</a> version 1.3.0
 or later. It's a build-time requirement and a run-time requirement. </li>
@@ -80,7 +80,12 @@ or later. It's a build-time requirement and a run-time requirement. </li>
 
 <ul>
  <li> <!-- The current released version of pamela is <a href="pamela-0.0.1.0.tar.gz">0.0.1.0</a>. -->
- pamela is a work in progress: there is no numbered version yet. </li>
+ pamela is in maintenance mode; there is no numbered version, and it is
+unfortunately likely that there will never be one. Given how most PAM-using
+projects are written, chances are that pamela will not help; sanitizing PAM
+is really more about changing the programming habits of its users to use
+component isolation than it is about actual isolation software.
+</li>
  <li> You can checkout a copy of the
 <a href="//git.skarnet.org/cgi-bin/cgit.cgi/pamela/">pamela
 git repository</a>:
@@ -137,7 +142,7 @@ public interface to Linux-PAM</a> is implemented by the pamela library. </li>
 
 <ul>
  <li> <tt>pamela</tt> is discussed on the
-<a href="//skarnet.org/lists.html#skaware">skaware</a> mailing-list. </li>
+<a href="//skarnet.org/lists/#skaware">skaware</a> mailing-list. </li>
 </ul>
 
 </body>

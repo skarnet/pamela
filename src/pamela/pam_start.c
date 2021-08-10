@@ -23,7 +23,7 @@ int pam_start (char const *service_name, char const *user, struct pam_conv const
   a->flagerrcached = a->flagenvcached = 0 ;
   for (unsigned int i = 0 ; i < _PAM_RETURN_VALUES ; i++) a->err[i] = stralloc_zero ;
   for (unsigned int i = 0 ; i < PAM_ITEM_MAX ; i++) a->item[i] = stralloc_zero ;
-  e = pamela_startf(&a->handle, service_name, user, pam_conversation && pam_conversation->conv ? (pamela_pam_conv_func_t_ref)pam_conversation->conv : &pamela_dummy_conv, pam_conversation ? pam_conversation->appdata_ptr : 0) ;
+  e = pamela_startf(&a->handle, service_name, user, pam_conversation && pam_conversation->conv ? (pamela_pam_conv_func_ref)pam_conversation->conv : &pamela_dummy_conv, pam_conversation ? pam_conversation->appdata_ptr : 0) ;
   if (e)
   {
     free(a) ;

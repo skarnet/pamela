@@ -315,7 +315,7 @@ int main (int argc, char const *const *argv)
   if (argc < 3) strerr_dieusage(100, USAGE) ;
   if (ndelay_on(0) < 0) strerr_diefu2sys(111, "ndelay_on ", "0") ;
   if (ndelay_on(1) < 0) strerr_diefu2sys(111, "ndelay_on ", "1") ;
-  if (sig_ignore(SIGPIPE) < 0) strerr_diefu1sys(111, "ignore SIGPIPE") ;
+  if (!sig_altignore(SIGPIPE)) strerr_diefu1sys(111, "ignore SIGPIPE") ;
 
   if (!getgid())
   {

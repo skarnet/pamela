@@ -8,7 +8,7 @@
 #include <pamela/config.h>
 #include <pamela/pamela.h>
 
-int pamela_startf (pamela_t *a, char const *service_name, char const *user, pamela_pam_conv_func_t_ref convfn, void *aux)
+int pamela_startf (pamela_t *a, char const *service_name, char const *user, pamela_pam_conv_func_ref convfn, void *aux)
 {
   char const *argv[4] = { PAMELA_LIBEXECPREFIX "pamelad", service_name, user, 0 } ;
   int fd[2] ;

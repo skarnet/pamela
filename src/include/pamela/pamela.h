@@ -24,8 +24,8 @@
 
  /* pam_fail_delay */
 
-typedef void pamela_pam_delay_func_t (int, unsigned int, void *) ;
-typedef pamela_pam_delay_func_t *pamela_pam_delay_func_t_ref ;
+typedef void pamela_pam_delay_func (int, unsigned int, void *) ;
+typedef pamela_pam_delay_func *pamela_pam_delay_func_ref ;
 
 
  /* Conversations */
@@ -46,8 +46,8 @@ struct pamela_pam_response_s
 
 extern void pamela_pam_response_free (pamela_pam_response_t *, uint32_t) ;
 
-typedef int pamela_pam_conv_func_t (int, pamela_pam_message_t const **, pamela_pam_response_t **, void *) ;
-typedef pamela_pam_conv_func_t *pamela_pam_conv_func_t_ref ;
+typedef int pamela_pam_conv_func (int, pamela_pam_message_t const **, pamela_pam_response_t **, void *) ;
+typedef pamela_pam_conv_func *pamela_pam_conv_func_ref ;
 
 
  /* Client handle */
@@ -55,11 +55,11 @@ typedef pamela_pam_conv_func_t *pamela_pam_conv_func_t_ref ;
 typedef struct pamela_s pamela_t, *pamela_t_ref ;
 struct pamela_s
 {
-  textmessage_receiver_t in ;
-  textmessage_sender_t out ;
+  textmessage_receiver in ;
+  textmessage_sender out ;
   pid_t pid ;
-  pamela_pam_delay_func_t_ref delayfn ;
-  pamela_pam_conv_func_t_ref convfn ;
+  pamela_pam_delay_func_ref delayfn ;
+  pamela_pam_conv_func_ref convfn ;
   void *aux ;
   char inbuf[PAMELA_BUFSIZE] ;
 } ;
@@ -70,7 +70,7 @@ extern pamela_t const pamela_zero ;
 
  /* User-facing functions */
 
-extern int pamela_startf (pamela_t *, char const *, char const *, pamela_pam_conv_func_t_ref, void *) ;
+extern int pamela_startf (pamela_t *, char const *, char const *, pamela_pam_conv_func_ref, void *) ;
 extern void pamela_end (pamela_t *) ;
 extern int pamela_strerror (pamela_t *, unsigned char, stralloc *) ;
 extern int pamela_getenvlist (pamela_t *, stralloc *) ;
