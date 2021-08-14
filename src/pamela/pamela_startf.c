@@ -2,9 +2,11 @@
 
 #include <sys/types.h>
 #include <sys/uio.h>
-#include <skalibs/environ.h>
+
+#include <skalibs/posixplz.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
+
 #include <pamela/config.h>
 #include <pamela/pamela.h>
 
