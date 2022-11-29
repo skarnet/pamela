@@ -11,7 +11,7 @@
 #include <skalibs/types.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/env.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
