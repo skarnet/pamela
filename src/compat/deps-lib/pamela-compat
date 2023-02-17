@@ -1,0 +1,3 @@
+misc_conv.o
+pam_misc_drop_env.o
+pam_misc_paste_env.o
