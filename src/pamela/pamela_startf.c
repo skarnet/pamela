@@ -4,6 +4,7 @@
 #include <sys/uio.h>
 
 #include <skalibs/posixplz.h>
+#include <skalibs/cspawn.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
 
