@@ -25,3 +25,4 @@ pamela_set_itemv.o
 pamela_startf.o
 pamela_strerror.o
 pamela_zero.o
+-lskarnet

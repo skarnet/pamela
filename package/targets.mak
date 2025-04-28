@@ -3,6 +3,7 @@ BIN_TARGETS :=
 LIBEXEC_TARGETS := pamelad
 
 LIB_DEFS := PAMELA=pamela
+PAMELA_DESCRIPTION := The pamela client library, a secure PAM implementation.
 
 PAM_LIB := -lpam
 

@@ -10,8 +10,8 @@ Build Instructions
   - Linux-PAM version 1.3.0 or later: http://www.linux-pam.org/library/
 
  This software will run on any operating system that implements
-POSIX.1-2008, available at:
-  http://pubs.opengroup.org/onlinepubs/9699919799/
+POSIX.1-2024, available at:
+  http://pubs.opengroup.org/onlinepubs/9799919799/
 as well as Linux-PAM. As of September 2024, this means only Linux.
 
 
@@ -40,6 +40,33 @@ possibly overwriting any previous security/pam_appl.h file.
 Please note that if you try and build pamela again *after* doing
 this, the pamelad binary (which expects Linux-PAM, not pamela,
 in security/pam_appl.h) may not be built correctly.
+
+
+* pkg-config
+  ----------
+
+ pkg-config is a tool used by some Linux and BSD distributions, providing
+a registry to store policy information about libraries exported by a
+software package; that is supposed to make it easier to build software
+depending on these libraries, by having a tool to automatically extract
+the various flags to pass to the compiler and linker in order to correctly
+build against these libraries.
+ This package supports pkg-config, but you need to explicitly ask for it:
+ - To use the pkg-config tool to *read* information from the registry and
+use it to build *this* package: --with-pkgconfig[=PROG]. This assumes
+PROG supports the pkg-config interface (as the popular pkgconf
+implementation does). If PROG is not supplied, the PKG_CONFIG environment
+variable is used to find the program to use, and if empty/unset, it defaults
+to pkg-config.
+ - To build a .pc file for each library exported by this package, and then
+install it to the pkg-config registry, in other words to *write* information
+so that other software can use pkg-config to build against this package,
+use --enable-pkgconfig.
+
+ pkg-config and slashpackage (see below) configure options can be set
+together, but the slashpackage convention provides its own installation
+policies that generally make it unnecessary to use pkg-config. You
+probably should not mix both.
 
 
 * Customization
